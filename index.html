@@ -162,16 +162,8 @@ button:hover {
     <button id="openBtn">Open</button>
 </div>
 
-<!-- Audio -->
-<audio id="bgMusic" autoplay loop>
-    <source src="https://basicuser3.github.io/website/RahmatunLilAlameen.mp3" type="audio/mpeg">
-</audio>
-
-<script>
-const audio = document.getElementById('bgMusic');
-audio.volume = 0.5;
-audio.play().catch(err => console.log("Audio play blocked by browser:", err));
-</script>
+<!-- Audio: simple autoplay and hidden -->
+<audio src="https://basicuser3.github.io/Website/RahmatunLilAlameen.mp3" autoplay loop style="display:none"></audio>
 
 <script>
 // Stars
