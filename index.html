@@ -5,7 +5,7 @@
 <title>Ramadan Mubarak</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Elegant Ramadan Fonts -->
+<!-- Elegant Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Amiri&display=swap" rel="stylesheet">
 
 <style>
@@ -21,20 +21,29 @@ body {
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    font-family: 'Amiri', serif;
     background: linear-gradient(-45deg, #0f2027, #1c1c3c, #203a43, #000814);
     background-size: 400% 400%;
-    animation: gradientBG 18s ease infinite;
-    color: white;
+    animation: gradientBG 20s ease infinite;
+    transition: background 1s;
 }
 
-/* Animated Gradient */
+/* Light mode support */
+@media (prefers-color-scheme: light) {
+    body {
+        background: linear-gradient(-45deg, #ffe0b3, #fff4e6, #ffd699, #ffe6cc);
+        color: #333;
+    }
+}
+
+/* Gradient Animation */
 @keyframes gradientBG {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
-/* Twinkling Stars */
+/* Stars */
 .star {
     position: absolute;
     width: 2px;
@@ -42,12 +51,13 @@ body {
     background: white;
     border-radius: 50%;
     opacity: 0.8;
-    animation: twinkle 2s infinite alternate;
+    animation: twinkle linear infinite;
 }
 
 @keyframes twinkle {
-    from { opacity: 0.3; transform: scale(1); }
-    to { opacity: 1; transform: scale(1.6); }
+    0% { opacity: 0.2; transform: translateY(0) scale(1); }
+    50% { opacity: 1; transform: translateY(-50px) scale(1.5); }
+    100% { opacity: 0.2; transform: translateY(0) scale(1); }
 }
 
 /* Card */
@@ -63,7 +73,7 @@ body {
     z-index: 2;
 }
 
-/* Elegant Islamic Gold Border */
+/* Animated Gold Border */
 .card::before {
     content: "";
     position: absolute;
@@ -109,8 +119,8 @@ h1 {
     text-shadow: 0 0 20px rgba(255,215,0,0.7);
 }
 
+/* Paragraph */
 p {
-    font-family: 'Amiri', serif;
     font-size: 1.2rem;
     margin-bottom: 30px;
     opacity: 0.9;
@@ -148,7 +158,7 @@ button:hover {
 </head>
 <body>
 
-<!-- Background Nasheed (Google Drive Hosted) -->
+<!-- Background Nasheed -->
 <audio id="bgMusic" loop>
     <source src="https://drive.google.com/uc?export=download&id=1gKmbUrMWv6hkroNiijh5ci0rAcsuBoBU" type="audio/mpeg">
 </audio>
@@ -163,13 +173,14 @@ button:hover {
 </div>
 
 <script>
-// Create Stars
+// Create moving twinkling stars
 for (let i = 0; i < 80; i++) {
     let star = document.createElement("div");
     star.classList.add("star");
     star.style.left = Math.random() * 100 + "vw";
     star.style.top = Math.random() * 100 + "vh";
-    star.style.animationDuration = (1 + Math.random() * 2) + "s";
+    star.style.animationDuration = (3 + Math.random() * 4) + "s";
+    star.style.animationDelay = Math.random() * 5 + "s";
     document.body.appendChild(star);
 }
 
@@ -179,8 +190,13 @@ function reveal() {
     const flash = document.getElementById("flash");
     const audio = document.getElementById("bgMusic");
 
-    audio.play();
+    // Play audio reliably
+    audio.play().catch(() => {
+        // If blocked, will play on first interaction
+        document.body.addEventListener("click", () => audio.play(), { once: true });
+    });
 
+    // Animate card and flash
     card.style.transition = "0.8s";
     card.style.transform = "scale(0.8)";
     card.style.opacity = "0";
@@ -195,11 +211,6 @@ function reveal() {
         window.location.href = "ramadan.html";
     }, 1500);
 }
-
-// Enable audio on first click (browser restriction fix)
-document.body.addEventListener("click", function() {
-    document.getElementById("bgMusic").play();
-}, { once: true });
 </script>
 
 </body>
