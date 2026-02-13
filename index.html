@@ -2,15 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Ramadan Special Card</title>
+<title>Ramadan Mubarak</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Elegant Ramadan Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Amiri&display=swap" rel="stylesheet">
 
 <style>
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
 }
 
 body {
@@ -21,38 +23,54 @@ body {
     overflow: hidden;
     background: linear-gradient(-45deg, #0f2027, #1c1c3c, #203a43, #000814);
     background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
+    animation: gradientBG 18s ease infinite;
     color: white;
 }
 
-/* Animated Background */
+/* Animated Gradient */
 @keyframes gradientBG {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
-/* Ramadan Card */
+/* Twinkling Stars */
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; transform: scale(1); }
+    to { opacity: 1; transform: scale(1.6); }
+}
+
+/* Card */
 .card {
     position: relative;
     width: 85%;
     max-width: 700px;
-    padding: 70px 30px;
+    padding: 80px 40px;
     text-align: center;
     background: rgba(255,255,255,0.05);
-    backdrop-filter: blur(12px);
+    backdrop-filter: blur(14px);
     border-radius: 25px;
     z-index: 2;
 }
 
-/* Golden Border */
+/* Elegant Islamic Gold Border */
 .card::before {
     content: "";
     position: absolute;
-    inset: -15px;
+    inset: -18px;
     border-radius: 35px;
     padding: 6px;
-    background: linear-gradient(45deg, gold, #ffd700, #f5c542, gold);
+    background: linear-gradient(45deg, gold, #ffd700, #e6b800, gold);
     background-size: 300% 300%;
     animation: borderGlow 6s linear infinite;
     -webkit-mask:
@@ -60,7 +78,7 @@ body {
         linear-gradient(#000 0 0);
     -webkit-mask-composite: xor;
             mask-composite: exclude;
-    pointer-events: none; /* FIXED BUTTON ISSUE */
+    pointer-events: none;
 }
 
 @keyframes borderGlow {
@@ -69,33 +87,9 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-/* Islamic Corner Decorations */
-.corner {
-    position: absolute;
-    width: 60px;
-    height: 60px;
-    border: 3px solid gold;
-}
-
-.top-left { top: -20px; left: -20px; border-right: none; border-bottom: none; }
-.top-right { top: -20px; right: -20px; border-left: none; border-bottom: none; }
-.bottom-left { bottom: -20px; left: -20px; border-right: none; border-top: none; }
-.bottom-right { bottom: -20px; right: -20px; border-left: none; border-top: none; }
-
-h1 {
-    font-size: 2.8rem;
-    margin-bottom: 30px;
-    animation: glow 2s ease-in-out infinite alternate;
-}
-
-@keyframes glow {
-    from { text-shadow: 0 0 10px gold; }
-    to { text-shadow: 0 0 30px #ffd700; }
-}
-
-/* Crescent Moon */
+/* Moon */
 .moon {
-    font-size: 40px;
+    font-size: 50px;
     margin-bottom: 15px;
     animation: floatMoon 3s ease-in-out infinite;
 }
@@ -105,25 +99,27 @@ h1 {
     50% { transform: translateY(-10px); }
 }
 
-/* Lanterns */
-.lantern {
-    position: absolute;
-    top: 0;
-    font-size: 30px;
-    animation: swing 3s ease-in-out infinite alternate;
+/* Title */
+h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 2.8rem;
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+    color: #ffd700;
+    text-shadow: 0 0 20px rgba(255,215,0,0.7);
 }
 
-.l1 { left: 15%; }
-.l2 { right: 15%; }
-
-@keyframes swing {
-    from { transform: rotate(-10deg); }
-    to { transform: rotate(10deg); }
+p {
+    font-family: 'Amiri', serif;
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    opacity: 0.9;
 }
 
+/* Button */
 button {
     padding: 14px 35px;
-    font-size: 1.1rem;
+    font-size: 1rem;
     border: none;
     border-radius: 50px;
     cursor: pointer;
@@ -135,10 +131,10 @@ button {
 }
 
 button:hover {
-    transform: scale(1.1);
+    transform: scale(1.08);
 }
 
-/* Flash Transition */
+/* Flash transition */
 .flash {
     position: absolute;
     width: 100%;
@@ -159,26 +155,30 @@ button:hover {
 
 <div class="flash" id="flash"></div>
 
-<div class="lantern l1">🏮</div>
-<div class="lantern l2">🏮</div>
-
 <div class="card" id="card">
-
-    <div class="corner top-left"></div>
-    <div class="corner top-right"></div>
-    <div class="corner bottom-left"></div>
-    <div class="corner bottom-right"></div>
-
     <div class="moon">🌙</div>
-    <h1>Ramadan Special Surprise</h1>
-    <button onclick="reveal()">Open the Blessed Card</button>
+    <h1>Ramadan Special Card</h1>
+    <p>A blessed surprise awaits you...</p>
+    <button onclick="reveal()">Open</button>
 </div>
 
 <script>
+// Create Stars
+for (let i = 0; i < 80; i++) {
+    let star = document.createElement("div");
+    star.classList.add("star");
+    star.style.left = Math.random() * 100 + "vw";
+    star.style.top = Math.random() * 100 + "vh";
+    star.style.animationDuration = (1 + Math.random() * 2) + "s";
+    document.body.appendChild(star);
+}
+
+// Reveal Animation
 function reveal() {
     const card = document.getElementById("card");
     const flash = document.getElementById("flash");
 
+    card.style.transition = "0.8s";
     card.style.transform = "scale(0.8)";
     card.style.opacity = "0";
 
@@ -190,10 +190,10 @@ function reveal() {
 
     setTimeout(() => {
         window.location.href = "ramadan.html";
-    }, 1600);
+    }, 1500);
 }
 
-/* Enable audio on first click (browser restriction fix) */
+// Enable audio after first interaction (browser restriction fix)
 document.body.addEventListener("click", function() {
     const audio = document.getElementById("bgMusic");
     audio.play();
