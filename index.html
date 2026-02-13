@@ -2,165 +2,202 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Ramadan Surprise</title>
+<title>Ramadan Special Card</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: 'Poppins', sans-serif;
-    }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
 
-    body {
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-        background: linear-gradient(-45deg, #0f2027, #1c1c3c, #203a43, #000814);
-        background-size: 400% 400%;
-        animation: gradientBG 15s ease infinite;
-        color: white;
-    }
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background: linear-gradient(-45deg, #0f2027, #1c1c3c, #203a43, #000814);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    color: white;
+}
 
-    @keyframes gradientBG {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
+/* Animated Background */
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
 
-    /* Decorative Ramadan Card Frame */
-    .card-frame {
-        position: relative;
-        width: 85%;
-        max-width: 700px;
-        padding: 60px 30px;
-        text-align: center;
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(10px);
-        border-radius: 20px;
-        z-index: 2;
-    }
+/* Ramadan Card */
+.card {
+    position: relative;
+    width: 85%;
+    max-width: 700px;
+    padding: 70px 30px;
+    text-align: center;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(12px);
+    border-radius: 25px;
+    z-index: 2;
+}
 
-    /* Gold Border */
-    .card-frame::before {
-        content: "";
-        position: absolute;
-        inset: -15px;
-        border-radius: 30px;
-        padding: 5px;
-        background: linear-gradient(45deg, gold, #ffd700, #f5c542, gold);
-        background-size: 300% 300%;
-        animation: borderGlow 6s linear infinite;
-        -webkit-mask:
-            linear-gradient(#000 0 0) content-box,
-            linear-gradient(#000 0 0);
-        -webkit-mask-composite: xor;
-                mask-composite: exclude;
-    }
+/* Golden Border */
+.card::before {
+    content: "";
+    position: absolute;
+    inset: -15px;
+    border-radius: 35px;
+    padding: 6px;
+    background: linear-gradient(45deg, gold, #ffd700, #f5c542, gold);
+    background-size: 300% 300%;
+    animation: borderGlow 6s linear infinite;
+    -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    pointer-events: none; /* FIXED BUTTON ISSUE */
+}
 
-    @keyframes borderGlow {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
+@keyframes borderGlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
 
-    h1 {
-        font-size: 2.8rem;
-        margin-bottom: 30px;
-        animation: glow 2s ease-in-out infinite alternate;
-    }
+/* Islamic Corner Decorations */
+.corner {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border: 3px solid gold;
+}
 
-    @keyframes glow {
-        from { text-shadow: 0 0 10px gold; }
-        to { text-shadow: 0 0 25px #ffd700; }
-    }
+.top-left { top: -20px; left: -20px; border-right: none; border-bottom: none; }
+.top-right { top: -20px; right: -20px; border-left: none; border-bottom: none; }
+.bottom-left { bottom: -20px; left: -20px; border-right: none; border-top: none; }
+.bottom-right { bottom: -20px; right: -20px; border-left: none; border-top: none; }
 
-    button {
-        padding: 14px 35px;
-        font-size: 1.1rem;
-        border: none;
-        border-radius: 50px;
-        cursor: pointer;
-        background: linear-gradient(45deg, #ffd200, #f7971e);
-        color: #333;
-        font-weight: bold;
-        transition: 0.3s ease;
-        box-shadow: 0 5px 20px rgba(0,0,0,0.4);
-    }
+h1 {
+    font-size: 2.8rem;
+    margin-bottom: 30px;
+    animation: glow 2s ease-in-out infinite alternate;
+}
 
-    button:hover {
-        transform: scale(1.1);
-        box-shadow: 0 8px 25px rgba(0,0,0,0.6);
-    }
+@keyframes glow {
+    from { text-shadow: 0 0 10px gold; }
+    to { text-shadow: 0 0 30px #ffd700; }
+}
 
-    /* Flash effect */
-    .flash {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background: white;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.5s ease;
-    }
+/* Crescent Moon */
+.moon {
+    font-size: 40px;
+    margin-bottom: 15px;
+    animation: floatMoon 3s ease-in-out infinite;
+}
 
-    /* Floating stars */
-    .star {
-        position: absolute;
-        width: 3px;
-        height: 3px;
-        background: white;
-        border-radius: 50%;
-        opacity: 0.7;
-        animation: float linear infinite;
-    }
+@keyframes floatMoon {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
 
-    @keyframes float {
-        from { transform: translateY(100vh); }
-        to { transform: translateY(-10vh); }
-    }
+/* Lanterns */
+.lantern {
+    position: absolute;
+    top: 0;
+    font-size: 30px;
+    animation: swing 3s ease-in-out infinite alternate;
+}
+
+.l1 { left: 15%; }
+.l2 { right: 15%; }
+
+@keyframes swing {
+    from { transform: rotate(-10deg); }
+    to { transform: rotate(10deg); }
+}
+
+button {
+    padding: 14px 35px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    background: linear-gradient(45deg, #ffd200, #f7971e);
+    color: #333;
+    font-weight: bold;
+    transition: 0.3s ease;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+
+/* Flash Transition */
+.flash {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: white;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
 </style>
 </head>
 <body>
 
+<!-- Background Nasheed -->
+<audio id="bgMusic" autoplay loop>
+    <source src="nasheed.mp3" type="audio/mpeg">
+</audio>
+
 <div class="flash" id="flash"></div>
 
-<div class="card-frame" id="content">
-    <h1>🌙 Ramadan Surprise 🌙</h1>
-    <button onclick="reveal()">Open the Card</button>
+<div class="lantern l1">🏮</div>
+<div class="lantern l2">🏮</div>
+
+<div class="card" id="card">
+
+    <div class="corner top-left"></div>
+    <div class="corner top-right"></div>
+    <div class="corner bottom-left"></div>
+    <div class="corner bottom-right"></div>
+
+    <div class="moon">🌙</div>
+    <h1>Ramadan Special Surprise</h1>
+    <button onclick="reveal()">Open the Blessed Card</button>
 </div>
 
 <script>
-    // Floating stars
-    for (let i = 0; i < 50; i++) {
-        let star = document.createElement("div");
-        star.classList.add("star");
-        star.style.left = Math.random() * 100 + "vw";
-        star.style.animationDuration = (4 + Math.random() * 6) + "s";
-        star.style.opacity = Math.random();
-        document.body.appendChild(star);
-    }
+function reveal() {
+    const card = document.getElementById("card");
+    const flash = document.getElementById("flash");
 
-    function reveal() {
-        const content = document.getElementById("content");
-        const flash = document.getElementById("flash");
+    card.style.transform = "scale(0.8)";
+    card.style.opacity = "0";
 
-        content.style.transform = "scale(0.8)";
-        content.style.opacity = "0";
+    flash.style.opacity = "1";
 
-        flash.style.opacity = "1";
+    setTimeout(() => {
+        flash.style.opacity = "0";
+    }, 300);
 
-        setTimeout(() => {
-            flash.style.opacity = "0";
-        }, 300);
+    setTimeout(() => {
+        window.location.href = "ramadan.html";
+    }, 1600);
+}
 
-        setTimeout(() => {
-            window.location.href = "ramadan.html";
-        }, 1500);
-    }
+/* Enable audio on first click (browser restriction fix) */
+document.body.addEventListener("click", function() {
+    const audio = document.getElementById("bgMusic");
+    audio.play();
+}, { once: true });
 </script>
 
 </body>
