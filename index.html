@@ -163,8 +163,8 @@ button:hover {
 </div>
 
 <!-- Audio -->
-<audio id="bgMusic" loop>
-    <source src="https://basicuser3.github.io/Website/RahmatunLilAlameen.mp3" type="audio/mpeg">
+<audio id="bgMusic" loop muted>
+    <source src="https://basicuser3.github.io/website/RahmatunLilAlameen.mp3" type="audio/mpeg">
 </audio>
 
 <script>
@@ -179,26 +179,16 @@ for (let i = 0; i < 80; i++) {
     document.body.appendChild(star);
 }
 
-// Audio setup
+// Audio autoplay with muted trick
 const audio = document.getElementById('bgMusic');
 audio.volume = 0.5;
-
-// Try to play immediately (some browsers allow autoplay if volume is low)
-function tryPlayAudio() {
-    audio.play().catch(() => {
-        // If autoplay fails, play on first click/keydown
-        const unlockAudio = () => {
-            audio.play().catch(err => console.log("Audio play blocked:", err));
-            document.removeEventListener('click', unlockAudio);
-            document.removeEventListener('keydown', unlockAudio);
-        };
-        document.addEventListener('click', unlockAudio);
-        document.addEventListener('keydown', unlockAudio);
-    });
-}
-
-// Start audio ASAP
-tryPlayAudio();
+audio.play().then(() => {
+    setTimeout(() => { audio.muted = false; }, 100);
+}).catch(() => {
+    const unlock = () => { audio.play().then(()=>{ audio.muted = false; }); };
+    document.addEventListener('click', unlock, { once: true });
+    document.addEventListener('keydown', unlock, { once: true });
+});
 
 // Reveal button
 document.getElementById('openBtn').addEventListener('click', () => {
@@ -214,7 +204,6 @@ document.getElementById('openBtn').addEventListener('click', () => {
     setTimeout(()=>{ window.location.href = "ramadan.html"; }, 1500);
 });
 </script>
-
 
 </body>
 </html>
