@@ -148,9 +148,9 @@ button:hover {
 </head>
 <body>
 
-<!-- Background Nasheed -->
-<audio id="bgMusic" autoplay loop>
-    <source src="nasheed.mp3" type="audio/mpeg">
+<!-- Background Nasheed (Google Drive Hosted) -->
+<audio id="bgMusic" loop>
+    <source src="https://drive.google.com/uc?export=download&id=1gKmbUrMWv6hkroNiijh5ci0rAcsuBoBU" type="audio/mpeg">
 </audio>
 
 <div class="flash" id="flash"></div>
@@ -177,6 +177,9 @@ for (let i = 0; i < 80; i++) {
 function reveal() {
     const card = document.getElementById("card");
     const flash = document.getElementById("flash");
+    const audio = document.getElementById("bgMusic");
+
+    audio.play();
 
     card.style.transition = "0.8s";
     card.style.transform = "scale(0.8)";
@@ -193,10 +196,9 @@ function reveal() {
     }, 1500);
 }
 
-// Enable audio after first interaction (browser restriction fix)
+// Enable audio on first click (browser restriction fix)
 document.body.addEventListener("click", function() {
-    const audio = document.getElementById("bgMusic");
-    audio.play();
+    document.getElementById("bgMusic").play();
 }, { once: true });
 </script>
 
