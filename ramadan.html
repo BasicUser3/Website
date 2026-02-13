@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ramadan Mubarak</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at top, #1c1c3c, #000814);
+            color: gold;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .content {
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        h1 {
+            font-size: 3rem;
+            letter-spacing: 3px;
+        }
+
+        p {
+            margin-top: 15px;
+            font-size: 1.2rem;
+            color: #f5d76e;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px gold, 0 0 20px #ffcc00;
+            }
+            to {
+                text-shadow: 0 0 20px #ffd700, 0 0 40px #ffaa00;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="content">
+        <h1>🌙 Ramadan Mubarak 🌙</h1>
+        <p>May this holy month bring peace, happiness, and prosperity to you and your family.</p>
+    </div>
+
+</body>
+</html>
