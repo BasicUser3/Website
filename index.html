@@ -9,6 +9,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Amiri&display=swap" rel="stylesheet">
 
 <style>
+/* Force dark mode colors */
+html, body {
+    background: linear-gradient(-45deg, #0f2027, #1c1c3c, #203a43, #000814);
+    color: white;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -22,10 +28,6 @@ body {
     align-items: center;
     overflow: hidden;
     font-family: 'Amiri', serif;
-    background: linear-gradient(-45deg, #0f2027, #1c1c3c, #203a43, #000814);
-    background-size: 400% 400%;
-    animation: gradientBG 20s ease infinite;
-    color: white;
 }
 
 /* Gradient background animation */
@@ -33,6 +35,10 @@ body {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
+}
+body {
+    background-size: 400% 400%;
+    animation: gradientBG 20s ease infinite;
 }
 
 /* Stars */
@@ -58,7 +64,7 @@ body {
     width: clamp(280px, 85%, 700px);
     padding: clamp(40px, 8vw, 80px) clamp(20px, 5vw, 40px);
     text-align: center;
-    background: rgba(255,255,255,0.05);
+    background: rgba(255,255,255,0.05); /* subtle dark card */
     backdrop-filter: blur(14px);
     border-radius: clamp(15px, 5vw, 25px);
     z-index: 2;
@@ -69,10 +75,10 @@ body {
 .card::before {
     content: "";
     position: absolute;
-    top: -0.5em;
-    left: -0.5em;
-    right: -0.5em;
-    bottom: -0.5em;
+    top: -6px;
+    left: -6px;
+    right: -6px;
+    bottom: -6px;
     border-radius: inherit;
     pointer-events: none;
     box-shadow: 0 0 1.2em gold, 0 0 2.4em rgba(255,215,0,0.6), 0 0 3.6em rgba(255,215,0,0.4);
