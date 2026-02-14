@@ -27,12 +27,12 @@ body {
     animation: fadeIn 2s ease forwards;
 }
 
-/* Fade-in on page load */
+/* Fade-in animation */
 @keyframes fadeIn {
     to { opacity: 1; }
 }
 
-/* Aurora effect */
+/* Aurora background */
 body::before {
     content: "";
     position: absolute;
@@ -70,7 +70,7 @@ body::before {
     100% { opacity: 0.2; transform: translateY(0) scale(1); }
 }
 
-/* Content Glow */
+/* Content */
 .content {
     animation: glow 2s ease-in-out infinite alternate;
     z-index: 2;
@@ -111,7 +111,7 @@ p {
 <body>
 
 <div class="content">
-    <h1>🌙 Ramadan Mubarak 🌙</h1>
+    <h1>Ramadan Mubarak</h1>
     <p>May this holy month bring peace, happiness, and prosperity to you and your family.</p>
 </div>
 
@@ -119,7 +119,7 @@ p {
 <audio id="bgMusic" src="RahmatunLilAlameen.mp3" loop style="display:none"></audio>
 
 <script>
-// Generate stars
+// Stars
 for (let i = 0; i < 80; i++) {
     const star = document.createElement('div');
     star.className = 'star';
@@ -134,16 +134,15 @@ for (let i = 0; i < 80; i++) {
 const audio = document.getElementById("bgMusic");
 audio.volume = 0.5;
 
-// Check URL for flag from Open button
-const urlParams = new URLSearchParams(window.location.search);
-const playImmediately = urlParams.get('play') === 'true';
-
-if (playImmediately) {
-    // User clicked Open -> autoplay audio 6s in
-    audio.currentTime = 6;
+// Check if the audio is already playing from previous page
+if (window.sharedAudio) {
+    // Continue playing the previous audio
+    window.sharedAudio.loop = true;
+    audio.src = window.sharedAudio.src;
+    audio.currentTime = window.sharedAudio.currentTime;
     audio.play().catch(err => console.log("Audio blocked:", err));
 } else {
-    // Fallback: play on first user click
+    // Fallback: play on first click
     const unlockAudio = () => {
         audio.currentTime = 6;
         audio.play().catch(err => console.log("Audio blocked:", err));
