@@ -116,7 +116,7 @@ p {
 </div>
 
 <!-- Audio -->
-<audio id="bgMusic" src="RahmatunLilAlameen.mp3" autoplay loop style="display:none"></audio>
+<audio id="bgMusic" src="RahmatunLilAlameen.mp3" loop style="display:none"></audio>
 
 <script>
 // Generate stars
@@ -134,17 +134,23 @@ for (let i = 0; i < 80; i++) {
 const audio = document.getElementById("bgMusic");
 audio.volume = 0.5;
 
-// Try autoplay immediately
-audio.currentTime = 6;
-audio.play().catch(() => {
-    // If blocked, play on first user interaction
+// Check URL for flag from Open button
+const urlParams = new URLSearchParams(window.location.search);
+const playImmediately = urlParams.get('play') === 'true';
+
+if (playImmediately) {
+    // User clicked Open -> autoplay audio 6s in
+    audio.currentTime = 6;
+    audio.play().catch(err => console.log("Audio blocked:", err));
+} else {
+    // Fallback: play on first user click
     const unlockAudio = () => {
         audio.currentTime = 6;
         audio.play().catch(err => console.log("Audio blocked:", err));
         document.removeEventListener('click', unlockAudio);
     };
     document.addEventListener('click', unlockAudio);
-});
+}
 </script>
 
 </body>
