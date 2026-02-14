@@ -70,7 +70,7 @@ body {
     z-index: 2;
 }
 
-/* Glow */
+/* Glow around card */
 .card::before {
     content: "";
     position: absolute;
@@ -94,7 +94,11 @@ body {
     font-size: clamp(30px, 8vw, 50px);
     margin-bottom: 15px;
     animation: floatMoon 3s ease-in-out infinite;
-    text-shadow: 0 0 0.6em #ffd700, 0 0 1.2em #ffd700;
+    text-shadow: 
+        0 0 2px #ffd700,
+        0 0 4px #ffd700,
+        0 0 6px #ffd700,
+        0 0 8px #ffd700;
 }
 
 @keyframes floatMoon {
@@ -102,22 +106,33 @@ body {
     50% { transform: translateY(-10px); }
 }
 
+/* Heading with sharper glow */
 h1 {
     font-family: 'Cinzel', serif;
     font-size: clamp(1.5rem, 5vw, 2.8rem);
     margin-bottom: 15px;
     letter-spacing: 2px;
     color: #ffd700;
-    text-shadow: 0 0 0.8em #ffd700, 0 0 1.5em #ffd700, 0 0 2em #ffd700;
+    text-shadow:
+        0 0 1px #ffd700,
+        0 0 2px #ffd700,
+        0 0 3px #ffd700,
+        0 0 4px #ffd700;
 }
 
+/* Paragraph glow */
 p {
     font-size: clamp(0.9rem, 3vw, 1.2rem);
     margin-bottom: 30px;
-    opacity: 0.9;
-    text-shadow: 0 0 0.4em #ffffff, 0 0 0.8em #ffffff;
+    color: #ffffff;
+    text-shadow:
+        0 0 1px #ffffff,
+        0 0 2px #ffffff,
+        0 0 3px #ffffff,
+        0 0 4px #ffffff;
 }
 
+/* Button glow */
 button {
     padding: 12px 30px;
     border: none;
@@ -127,14 +142,17 @@ button {
     font-weight: bold;
     transition: 0.3s ease;
     color: #000000;
-    text-shadow: 0 0 0.6em #ffd700, 0 0 1em #ffd200;
+    text-shadow:
+        0 0 2px #ffd700,
+        0 0 4px #ffd700,
+        0 0 6px #ffd700;
 }
 
 button:hover {
     transform: scale(1.08);
 }
 
-/* Flash */
+/* Flash overlay */
 .flash {
     position: absolute;
     width: 100%;
@@ -145,7 +163,7 @@ button:hover {
     transition: opacity 0.5s ease;
 }
 
-/* Bottom flashing text */
+/* Bottom flashing text with sharper glow */
 #clickText {
     position: fixed;
     bottom: 20px;
@@ -156,7 +174,10 @@ button:hover {
     font-weight: bold;
     animation: blink 1s infinite;
     z-index: 5;
-    text-shadow: 0 0 0.6em #ffffff, 0 0 1.2em #ffffff;
+    text-shadow:
+        0 0 1px #ffffff,
+        0 0 2px #ffffff,
+        0 0 3px #ffffff;
 }
 
 @keyframes blink {
@@ -176,7 +197,7 @@ button:hover {
     <button id="openBtn">Open</button>
 </div>
 
-<div id="clickText">Click anywhere to listen</div>
+<div id="clickText">- Click anywhere to listen -</div>
 
 <audio id="bgMusic" src="RahmatunLilAlameen.mp3" loop style="display:none"></audio>
 
