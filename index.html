@@ -70,7 +70,7 @@ body {
     z-index: 2;
 }
 
-/* Glow around card */
+/* Enhanced Glow around card */
 .card::before {
     content: "";
     position: absolute;
@@ -80,13 +80,36 @@ body {
     bottom: -6px;
     border-radius: inherit;
     pointer-events: none;
-    box-shadow: 0 0 1.2em gold, 0 0 2.4em rgba(255,215,0,0.6), 0 0 3.6em rgba(255,215,0,0.4);
-    animation: glowPulse 2.5s ease-in-out infinite;
+    box-shadow:
+        0 0 1.5em gold,
+        0 0 3em rgba(255,215,0,0.8),
+        0 0 5em rgba(255,215,0,0.6),
+        0 0 8em rgba(255,215,0,0.4);
+    animation: glowPulse 2.5s ease-in-out infinite alternate;
 }
 
 @keyframes glowPulse {
-    0%,100% { box-shadow: 0 0 1.2em gold, 0 0 2.4em rgba(255,215,0,0.6), 0 0 3.6em rgba(255,215,0,0.4); }
-    50% { box-shadow: 0 0 2em gold, 0 0 4em rgba(255,215,0,0.6), 0 0 6em rgba(255,215,0,0.3); }
+    0% {
+        box-shadow:
+            0 0 1.5em gold,
+            0 0 3em rgba(255,215,0,0.8),
+            0 0 5em rgba(255,215,0,0.6),
+            0 0 8em rgba(255,215,0,0.4);
+    }
+    50% {
+        box-shadow:
+            0 0 2em gold,
+            0 0 4em rgba(255,215,0,0.9),
+            0 0 6em rgba(255,215,0,0.7),
+            0 0 10em rgba(255,215,0,0.5);
+    }
+    100% {
+        box-shadow:
+            0 0 1.5em gold,
+            0 0 3em rgba(255,215,0,0.8),
+            0 0 5em rgba(255,215,0,0.6),
+            0 0 8em rgba(255,215,0,0.4);
+    }
 }
 
 /* Moon */
@@ -163,7 +186,7 @@ button:hover {
     transition: opacity 0.5s ease;
 }
 
-/* Bottom flashing text with sharper glow */
+/* Bottom flashing text */
 #clickText {
     position: fixed;
     bottom: 20px;
@@ -194,39 +217,12 @@ button:hover {
     <div class="moon">🌙</div>
     <h1>Ramadan Special Card</h1>
     <p>A blessed surprise awaits you...</p>
-<button id="openBtn">Open</button>
-
-<script>
-document.getElementById('openBtn').addEventListener('click', () => {
-    const audio = new Audio('RahmatunLilAlameen.mp3');
-    audio.volume = 0.5;
-    audio.currentTime = 6;
-    audio.play().catch(err => console.log('Audio blocked:', err));
-
-    // Slight delay to register the user interaction, then redirect
-    setTimeout(() => {
-        window.location.href = 'ramadan.html';
-    }, 100);
-});
-</script>
-
+    <button id="openBtn">Open</button>
 </div>
 
 <div id="clickText">- Click anywhere to listen -</div>
 
 <audio id="bgMusic" src="RahmatunLilAlameen.mp3" loop style="display:none"></audio>
-
-<script>
-const audio = document.getElementById("bgMusic");
-audio.volume = 0.5;
-
-// Start music 6 seconds in on first click
-document.addEventListener("click", () => {
-    audio.currentTime = 6;
-    audio.play();
-    document.getElementById("clickText").style.display = "none";
-}, { once: true });
-</script>
 
 <script>
 // Stars
@@ -240,8 +236,22 @@ for (let i = 0; i < 80; i++) {
     document.body.appendChild(star);
 }
 
-// Reveal button
+// Audio setup
+const audio = document.getElementById("bgMusic");
+audio.volume = 0.5;
+
+// Start music 6 seconds in on first click anywhere
+document.addEventListener("click", () => {
+    audio.currentTime = 6;
+    audio.play();
+    document.getElementById("clickText").style.display = "none";
+}, { once: true });
+
+// Open button animation + redirect + sound
 document.getElementById('openBtn').addEventListener('click', () => {
+    audio.currentTime = 6;
+    audio.play().catch(err => console.log('Audio blocked:', err));
+
     const card = document.getElementById("card");
     const flash = document.getElementById("flash");
 
