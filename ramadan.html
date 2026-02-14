@@ -1,67 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Ramadan Mubarak</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Ramadan Mubarak</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
-        body {
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: radial-gradient(circle at top, #1c1c3c, #000814);
-            color: gold;
-            text-align: center;
-            overflow: hidden;
-        }
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at top, #1c1c3c, #000814);
+    color: gold;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+    opacity: 0;
+    animation: fadeIn 2s ease forwards;
+}
 
-        .content {
-            animation: glow 2s ease-in-out infinite alternate;
-        }
+/* Fade-in on page load */
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
 
-        h1 {
-            font-size: 3rem;
-            letter-spacing: 3px;
-        }
+/* Aurora effect */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(-45deg, rgba(128,0,128,0.2), rgba(0,0,128,0.2), rgba(0,0,0,0.5));
+    background-size: 400% 400%;
+    animation: aurora 20s ease infinite;
+    z-index: 0;
+}
 
-        p {
-            margin-top: 15px;
-            font-size: 1.2rem;
-            color: #f5d76e;
-        }
+@keyframes aurora {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
 
-        @keyframes glow {
-            from {
-                text-shadow: 0 0 10px gold, 0 0 20px #ffcc00;
-            }
-            to {
-                text-shadow: 0 0 20px #ffd700, 0 0 40px #ffaa00;
-            }
-        }
-    </style>
+/* Stars */
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: twinkle linear infinite;
+    z-index: 1;
+}
+
+@keyframes twinkle {
+    0% { opacity: 0.2; transform: translateY(0) scale(1); }
+    50% { opacity: 1; transform: translateY(-30px) scale(1.3); }
+    100% { opacity: 0.2; transform: translateY(0) scale(1); }
+}
+
+/* Content Glow */
+.content {
+    animation: glow 2s ease-in-out infinite alternate;
+    z-index: 2;
+    position: relative;
+    opacity: 0;
+    animation: fadeInContent 2s ease forwards 0.5s;
+}
+
+@keyframes fadeInContent {
+    to { opacity: 1; }
+}
+
+h1 {
+    font-size: 3rem;
+    letter-spacing: 3px;
+    text-shadow:
+        0 0 2px gold,
+        0 0 4px gold,
+        0 0 6px gold;
+}
+
+p {
+    margin-top: 15px;
+    font-size: 1.2rem;
+    color: #f5d76e;
+    text-shadow:
+        0 0 1px #f5d76e,
+        0 0 2px #f5d76e,
+        0 0 3px #f5d76e;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 10px gold, 0 0 20px #ffcc00; }
+    to { text-shadow: 0 0 20px #ffd700, 0 0 40px #ffaa00; }
+}
+</style>
 </head>
 <body>
 
-    <div class="content">
-        <h1>🌙 Ramadan Mubarak 🌙</h1>
-        <p>May this holy month bring peace, happiness, and prosperity to you and your family.</p>
-    </div>
+<div class="content">
+    <h1>🌙 Ramadan Mubarak 🌙</h1>
+    <p>May this holy month bring peace, happiness, and prosperity to you and your family.</p>
+</div>
 
-</body>
-    <audio id="bgMusic" src="RahmatunLilAlameen.mp3" autoplay loop style="display:none" type="audio/mpeg"></audio>
+<!-- Audio -->
+<audio id="bgMusic" src="RahmatunLilAlameen.mp3" loop style="display:none"></audio>
 
 <script>
+// Generate stars
+for (let i = 0; i < 80; i++) {
+    const star = document.createElement('div');
+    star.className = 'star';
+    star.style.left = Math.random() * 100 + 'vw';
+    star.style.top = Math.random() * 100 + 'vh';
+    star.style.animationDuration = (2 + Math.random() * 3) + 's';
+    star.style.animationDelay = Math.random() * 5 + 's';
+    document.body.appendChild(star);
+}
+
+// Audio setup
 const audio = document.getElementById("bgMusic");
 audio.volume = 0.5;
-audio.play().catch(err => console.log("Blocked:", err));
-</script
+
+// Try autoplay immediately
+audio.currentTime = 6;
+audio.play().catch(() => {
+    // If blocked, play on first user interaction
+    const unlockAudio = () => {
+        audio.currentTime = 6;
+        audio.play().catch(err => console.log("Audio blocked:", err));
+        document.removeEventListener('click', unlockAudio);
+    };
+    document.addEventListener('click', unlockAudio);
+});
+</script>
+
+</body>
 </html>
